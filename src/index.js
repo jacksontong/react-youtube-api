@@ -1,3 +1,4 @@
+import '../style/style.scss';
 import React, {Component} from 'react';
 import _ from 'lodash';
 import ReactDom from 'react-dom';

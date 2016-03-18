@@ -1,3 +1,5 @@
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var webpack = require('webpack');
 module.exports = {
   entry: [
     './src/index.js'
@@ -11,8 +13,22 @@ module.exports = {
     loaders: [{
       exclude: /node_modules/,
       loader: 'babel'
-    }]
+    },
+      {
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract(
+            "style",
+            "css!sass")
+      }]
   },
+  plugins: [
+    new ExtractTextPlugin("./style/style.min.css"),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
+    })
+  ],
   resolve: {
     extensions: ['', '.js', '.jsx']
   },
